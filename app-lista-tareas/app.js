@@ -1,10 +1,13 @@
 const { mostrarMenu, pausa, leerInput } = require("../helpers/inquirer");
 const Tareas = require("../models/tareas");
-const { guardarDB } = require("../helpers/guardarArchivo");
+const { guardarDB, leerDB } = require("../helpers/guardarArchivo");
 
 const main = async () => {
   let opt = "";
   let tareas = new Tareas();
+
+  const data = leerDB();
+  console.log(data);
 
   do {
     let { option } = await mostrarMenu();
@@ -16,9 +19,11 @@ const main = async () => {
         tareas.crearTarea(descripcion);
         break;
       case "2":
-        await guardarDB(tareas.listadoArr, "listado_tareas");
+        console.log(tareas.listadoArr);
         break;
     }
+
+    await guardarDB(tareas.listadoArr);
 
     await pausa();
   } while (opt !== "0");
