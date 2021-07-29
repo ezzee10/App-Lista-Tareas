@@ -7,7 +7,7 @@ const main = async () => {
   let tareas = new Tareas();
 
   const data = leerDB();
-  console.log(data);
+  tareas.cargarTareasFromArray(data);
 
   do {
     let { option } = await mostrarMenu();
@@ -19,7 +19,7 @@ const main = async () => {
         tareas.crearTarea(descripcion);
         break;
       case "2":
-        console.log(tareas.listadoArr);
+        tareas.listadoCompleto();
         break;
     }
 
