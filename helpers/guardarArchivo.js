@@ -1,13 +1,25 @@
 /* Función que genera un archivo .json */
 
-const guardarDB = (file, name = "") => {
-  const fs = require("fs");
+const fs = require("fs");
 
+const guardarDB = (file) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(`../db/${name}.json`, JSON.stringify(file), function (err) {
+    fs.writeFile(`../db/data.json`, JSON.stringify(file), function (err) {
       if (err) reject(err);
-      else resolve(`${name}.json creado correctamente`);
+      else resolve(`data.json creado correctamente`);
     });
   });
 };
-module.exports = { guardarDB };
+
+const leerDB = () => {
+  if (!fs.existsSync("../db/data.json")) {
+    return;
+  }
+
+  const data = fs.readFileSync("../db/data.json", { encoding: "utf-8" });
+  const dataParser = JSON.parse(data);
+
+  return dataParser;
+};
+
+module.exports = { guardarDB, leerDB };
