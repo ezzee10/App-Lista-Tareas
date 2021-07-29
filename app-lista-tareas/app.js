@@ -1,5 +1,6 @@
 const { mostrarMenu, pausa, leerInput } = require("../helpers/inquirer");
 const Tareas = require("../models/tareas");
+const { guardarDB } = require("../helpers/guardarArchivo");
 
 const main = async () => {
   let opt = "";
@@ -15,7 +16,7 @@ const main = async () => {
         tareas.crearTarea(descripcion);
         break;
       case "2":
-        console.log(tareas.listadoArr);
+        await guardarDB(tareas.listadoArr, "listado_tareas");
         break;
     }
 
