@@ -32,17 +32,37 @@ class Tareas {
 
   listadoCompleto() {
 
-    let idx = 0;
-
-    this.listadoArr.forEach((task) => {
+    this.listadoArr.forEach((task, i) => {
       const { desc, completadoEn } = task;
-      idx++;
       const complete = completadoEn
         ? colors.green("Completada")
         : colors.red("Pendiente");
-      console.log(`${colors.green(idx)} ${desc} :: ${complete}`);
+      console.log(`${colors.green( i+1 + '.')} ${desc} :: ${complete}`);
     });
   }
+
+  listarPendientesCompletadas(completadas = true) {
+
+    let contadorTareas = 1;
+
+    this.listadoArr.forEach((task, idx) => {
+
+      const { desc, completadoEn } = task;
+      const complete = completadoEn
+        ? colors.green("Completada")
+        : colors.red("Pendiente");
+
+      if (completadas && completadoEn) {
+        console.log(`${colors.green(`${contadorTareas}.`)} ${desc} :: ${complete}`);
+        contadorTareas ++;
+      } else if(!completadas && !completadoEn) {
+        console.log(`${colors.green(`${contadorTareas}.`)} ${desc} :: ${complete}`);
+        contadorTareas++;
+      }
+
+    })
+  }
+
 }
 
 module.exports = Tareas;

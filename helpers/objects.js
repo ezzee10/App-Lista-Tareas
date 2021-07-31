@@ -7,7 +7,7 @@ const questions = {
     choices: [
         {
             value: '1', 
-            name: 'Crear tarea',
+            name: colors.green('Crear tarea'),
         },
         {
             value: '2', 
