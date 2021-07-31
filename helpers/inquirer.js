@@ -3,7 +3,7 @@ const inquirer = require("inquirer");
 const { questions, pause } = require("./objects");
 
 const mostrarMenu = async () => {
-  // console.clear();
+
   console.log(
     colors.red(
       "************************** \n   Seleccione una opción \n************************** \n"
@@ -37,4 +37,51 @@ const leerInput = async (message) => {
   return descripcion;
 };
 
-module.exports = { mostrarMenu, pausa, leerInput };
+const listadoTareasBorrar = async ( tareas = []) => {
+
+  // console.log(tareas);
+
+  const choices = tareas.map((tarea, i) => {
+
+    return {
+      value: tarea.id,
+      name: `${colors.green(`${i + 1}.`)} ${ tarea.desc }`
+    }
+  })
+
+  choices.unshift({
+    value: '0',
+    name: colors.green('0. ') + 'Cancelar'
+  })
+
+  const question = [
+    {
+      type: "list",
+      name: "id",
+      message: "Borrar",
+      choices
+    },
+  ];
+
+  const { id } = await inquirer.prompt(question);
+
+  return id;
+  
+}
+
+const confirmar = async  ( message ) => {
+  const question = [
+    {
+      type: 'confirm',
+      name: 'ok',
+      message
+    }
+  ];
+
+  const { ok } = await inquirer.prompt(question);
+  return ok;
+}
+
+
+
+module.exports = { mostrarMenu, pausa, leerInput, listadoTareasBorrar, confirmar };

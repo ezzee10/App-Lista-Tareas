@@ -59,8 +59,15 @@ class Tareas {
         console.log(`${colors.green(`${contadorTareas}.`)} ${desc} :: ${complete}`);
         contadorTareas++;
       }
-
     })
+  }
+
+  borrarTarea(id) {
+
+    if( this._listado[id] ) {
+      delete this._listado[id];
+    }
+
   }
 
 }

@@ -1,4 +1,4 @@
-const { mostrarMenu, pausa, leerInput } = require("./helpers/inquirer");
+const { mostrarMenu, pausa, leerInput, listadoTareasBorrar, confirmar } = require("./helpers/inquirer");
 const Tareas = require("./models/tareas");
 const { guardarDB, leerDB } = require("./helpers/guardarArchivo");
 
@@ -16,7 +16,7 @@ const main = async () => {
 
     switch (opt) {
       case "1":
-        const descripcion = await leerInput();
+        const descripcion = await leerInput('Descripción: ');
         tareas.crearTarea(descripcion);
         break;
       case "2":
@@ -27,6 +27,19 @@ const main = async () => {
         break;
       case "4":
         tareas.listarPendientesCompletadas(false);
+        break;
+      case "6":
+        const id = await listadoTareasBorrar(tareas.listadoArr); 
+
+        if ( id !== '0') {
+            const ok = await confirmar('¿Está seguro?');
+
+            if (ok) {
+                tareas.borrarTarea(id);
+                console.log('Tarea borrada');
+            }
+        }
+
         break;
     }
 
