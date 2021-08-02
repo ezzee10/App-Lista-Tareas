@@ -7,30 +7,30 @@ const questions = {
     choices: [
         {
             value: '1', 
-            name: colors.green('Crear tarea'),
+            name: colors.green('1. Crear tarea'),
         },
         {
             value: '2', 
-            name: colors.green('Listar tareas'),
+            name: colors.green('2. Listar tareas'),
         }, 
         {
             value: '3', 
-            name: colors.green('Listar tareas completadas'),
+            name: colors.green('3. Listar tareas completadas'),
         },
         { 
             value: '4',
-            name: colors.green('Listar tareas pendientes'),
+            name: colors.green('4. Listar tareas pendientes'),
         },
         {
             value: '5',
-            name: colors.green('Completar tarea(s)'),
+            name: colors.green('5. Completar tarea(s)'),
         }, 
         {   value: '6',
-            name: colors.green('Borrar tarea'),
+            name: colors.green('6. Borrar tarea'),
         },
         {
             value: '0',
-            name: colors.red('Salir'),      
+            name: colors.red('0. Salir'),      
         }
     ],
 }
