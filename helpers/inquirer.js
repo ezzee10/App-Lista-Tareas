@@ -39,8 +39,6 @@ const leerInput = async (message) => {
 
 const listadoTareasBorrar = async ( tareas = []) => {
 
-  // console.log(tareas);
-
   const choices = tareas.map((tarea, i) => {
 
     return {
@@ -69,6 +67,33 @@ const listadoTareasBorrar = async ( tareas = []) => {
   
 }
 
+const mostrarListadoChecklist = async ( tareas = []) => {
+
+  const choices = tareas.map((tarea, i) => {
+
+    return {
+      value: tarea.id,
+      name: `${colors.green(`${i + 1}.`)} ${ tarea.desc }`,
+      checked: tarea.completadoEn ? true : false
+    }
+    
+  });
+
+  const question = [
+    {
+      type: "checkbox",
+      name: "ids",
+      message: "Selecciones",
+      choices
+    },
+  ];
+
+  const { ids } = await inquirer.prompt(question);
+
+  return ids;
+};
+
+
 const confirmar = async  ( message ) => {
   const question = [
     {
@@ -84,4 +109,4 @@ const confirmar = async  ( message ) => {
 
 
 
-module.exports = { mostrarMenu, pausa, leerInput, listadoTareasBorrar, confirmar };
+module.exports = { mostrarMenu, pausa, leerInput, listadoTareasBorrar, confirmar, mostrarListadoChecklist };
