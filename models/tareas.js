@@ -53,7 +53,7 @@ class Tareas {
         : colors.red("Pendiente");
 
       if (completadas && completadoEn) {
-        console.log(`${colors.green(`${contadorTareas}.`)} ${desc} :: ${complete}`);
+        console.log(`${colors.green(`${contadorTareas}.`)} ${desc} :: ${colors.green(`${completadoEn}.`)}`);
         contadorTareas ++;
       } else if(!completadas && !completadoEn) {
         console.log(`${colors.green(`${contadorTareas}.`)} ${desc} :: ${complete}`);
@@ -67,7 +67,23 @@ class Tareas {
     if( this._listado[id] ) {
       delete this._listado[id];
     }
+  }
 
+  toggleCompletadas(ids = []) {
+
+    ids.forEach((id) => {
+      const tarea = this._listado[id];
+      if (!tarea.completadoEn) {
+        tarea.completadoEn = new Date().toISOString();
+      }
+    });
+
+    this.listadoArr.forEach(tarea => {
+      const task = ids.filter(id => id === tarea.id);
+      if(task.length === 0) {
+        this._listado[tarea.id].completadoEn = null; 
+      }
+    })
   }
 
 }
