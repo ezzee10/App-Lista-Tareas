@@ -3,6 +3,9 @@ const Tareas = require("./models/tareas");
 const { guardarDB, leerDB } = require("./helpers/guardarArchivo");
 
 const main = async () => {
+
+  console.clear();
+
   let opt = "";
   let tareas = new Tareas();
 
@@ -30,7 +33,7 @@ const main = async () => {
         break;
       case "5":
         const ids = await mostrarListadoChecklist(tareas.listadoArr);
-        console.log(ids);
+        tareas.toggleCompletadas(ids);
         break;
       case "6":
         const id = await listadoTareasBorrar(tareas.listadoArr); 
